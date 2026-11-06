@@ -1,43 +1,64 @@
-//let button = document.getElementById("testButton");
-//let message = document.getElementById("message");
-//button.addEventListener("click", function () 
-//{
-//    message.textContent = "JavaScript is working successfully!";
-//});
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Get all sidebar menu items
+    // SIDEBAR ACTIVE MENU
+
     let menuItems = document.querySelectorAll(".menu-item");
 
-    // Get the current URL path
     let currentPath = window.location.pathname;
 
-    menuItems.forEach(function (item) 
-    {
+    menuItems.forEach(function (item) {
+
         let page = item.dataset.page;
 
-        // Remove active class first
         item.classList.remove("active");
 
-        // Dashboard
-        if 
-        (
+        if (
             page === "dashboard" &&
             (currentPath === "/" || currentPath === "")
-        ) 
-        {
+        ) {
             item.classList.add("active");
         }
-        
-        // Employees
-        else if 
-        (
+
+        else if (
             page === "employees" &&
             currentPath.startsWith("/employees/")
-        ) 
-        {
+        ) {
             item.classList.add("active");
         }
+
     });
+
+
+    // EMPLOYEE SEARCH
+
+    let searchInput = document.getElementById("employeeSearch");
+
+    if (searchInput) {
+
+        searchInput.addEventListener("input", function () {
+
+            let searchValue = searchInput.value.toLowerCase();
+
+            let rows = document.querySelectorAll(
+                "#employeesTable tbody tr"
+            );
+
+            rows.forEach(function (row) {
+
+                let rowText = row.textContent.toLowerCase();
+
+                if (rowText.includes(searchValue)) {
+                    row.style.display = "";
+                }
+
+                else {
+                    row.style.display = "none";
+                }
+
+            });
+
+        });
+
+    }
+
 });

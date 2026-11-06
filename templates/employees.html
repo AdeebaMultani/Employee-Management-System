@@ -17,7 +17,9 @@ Employees
     <div class="employees-header">
         <div>
             <h2>Employees</h2>
-            <p>Manage all employees in the organization.</p>
+            <p>Manage all employees in your organization.Total Employees: 
+                <strong>{{ total_employees }}</strong>
+            </p>
         </div>
 
         <a href="#" class="add-employee-btn">
@@ -54,106 +56,30 @@ Employees
                     </tr>
                 </thead>
                 <tbody>
+                    {% for employee in employees %}
+                    
                     <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>john@example.com</td>
-                        <td>IT</td>
-                        <td>Developer</td>
+                        <td>{{ employee.id }}</td>
+                        <td>{{ employee.full_name }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.department }}</td>
+                        <td>{{ employee.designation }}</td>
                         <td>
                             <div class="employee-actions">
-                                <a href="#" class="view-btn">
-                                    👁
-                                </a>
-                                <a href="#" class="edit-btn">
-                                    ✏
-                                </a>
-                                <a href="#" class="delete-btn">
-                                    🗑
-                                </a>
+                                <a href="#" class="view-btn" title="View">👁</a>
+                                <a href="#" class="edit-btn" title="Edit">✏</a>
+                                <a href="#" class="delete-btn" title="Delete">🗑</a>
                             </div>
                         </td>
                     </tr>
+                    {% empty %}
+                    
                     <tr>
-                        <td>2</td>
-                        <td>Jane Smith</td>
-                        <td>jane@example.com</td>
-                        <td>HR</td>
-                        <td>HR Manager</td>
-                        <td>
-                            <div class="employee-actions">
-                                <a href="#" class="view-btn">
-                                    👁
-                                </a>
-                                <a href="#" class="edit-btn">
-                                    ✏
-                                </a>
-                                <a href="#" class="delete-btn">
-                                    🗑
-                                </a>
-                            </div>
+                        <td colspan="6" style="text-align: center; padding: 30px;">
+                            No employees found. Add your first employee!
                         </td>
                     </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Michael Lee</td>
-                        <td>michael@example.com</td>
-                        <td>Finance</td>
-                        <td>Accountant</td>
-                        <td>
-                            <div class="employee-actions">
-                                <a href="#" class="view-btn">
-                                    👁
-                                </a>
-                                <a href="#" class="edit-btn">
-                                    ✏
-                                </a>
-                                <a href="#" class="delete-btn">
-                                    🗑
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Emily Davis</td>
-                        <td>emily@example.com</td>
-                        <td>Marketing</td>
-                        <td>Marketing Executive</td>
-                        <td>
-                            <div class="employee-actions">
-                                <a href="#" class="view-btn">
-                                    👁
-                                </a>
-                                <a href="#" class="edit-btn">
-                                    ✏
-                                </a>
-                                <a href="#" class="delete-btn">
-                                    🗑
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>David Brown</td>
-                        <td>david@example.com</td>
-                        <td>IT</td>
-                        <td>System Analyst</td>
-                        <td>
-                            <div class="employee-actions">
-                                <a href="#" class="view-btn">
-                                    👁
-                                </a>
-                                <a href="#" class="edit-btn">
-                                    ✏
-                                </a>
-                                <a href="#" class="delete-btn">
-                                    🗑
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
