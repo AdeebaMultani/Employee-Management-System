@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Employees - Employee Management System
+{% endblock %}
+
+{% block page_title %}
+Employees
+{% endblock %}
+
+{% block content %}
+
+<div class="employees-page">
+    
+    <!-- PAGE HEADER -->
+
+    <div class="employees-header">
+        <div>
+            <h2>Employees</h2>
+            <p>Manage all employees in the organization.</p>
+        </div>
+
+        <a href="#" class="add-employee-btn">
+            + Add Employee
+        </a>
+    </div>
+
+    <!-- SEARCH BAR -->
+
+    <div class="employee-toolbar">
+        <div class="search-box">
+            <span>🔍</span>
+            <input
+                type="text"
+                id="employeeSearch"
+                placeholder="Search employees..."
+            >
+        </div>
+    </div>
+
+    <!-- EMPLOYEES TABLE -->
+
+    <div class="dashboard-card employees-table-card">
+        <div class="table-container">
+            <table id="employeesTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>john@example.com</td>
+                        <td>IT</td>
+                        <td>Developer</td>
+                        <td>
+                            <div class="employee-actions">
+                                <a href="#" class="view-btn">
+                                    👁
+                                </a>
+                                <a href="#" class="edit-btn">
+                                    ✏
+                                </a>
+                                <a href="#" class="delete-btn">
+                                    🗑
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>jane@example.com</td>
+                        <td>HR</td>
+                        <td>HR Manager</td>
+                        <td>
+                            <div class="employee-actions">
+                                <a href="#" class="view-btn">
+                                    👁
+                                </a>
+                                <a href="#" class="edit-btn">
+                                    ✏
+                                </a>
+                                <a href="#" class="delete-btn">
+                                    🗑
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Michael Lee</td>
+                        <td>michael@example.com</td>
+                        <td>Finance</td>
+                        <td>Accountant</td>
+                        <td>
+                            <div class="employee-actions">
+                                <a href="#" class="view-btn">
+                                    👁
+                                </a>
+                                <a href="#" class="edit-btn">
+                                    ✏
+                                </a>
+                                <a href="#" class="delete-btn">
+                                    🗑
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Emily Davis</td>
+                        <td>emily@example.com</td>
+                        <td>Marketing</td>
+                        <td>Marketing Executive</td>
+                        <td>
+                            <div class="employee-actions">
+                                <a href="#" class="view-btn">
+                                    👁
+                                </a>
+                                <a href="#" class="edit-btn">
+                                    ✏
+                                </a>
+                                <a href="#" class="delete-btn">
+                                    🗑
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>David Brown</td>
+                        <td>david@example.com</td>
+                        <td>IT</td>
+                        <td>System Analyst</td>
+                        <td>
+                            <div class="employee-actions">
+                                <a href="#" class="view-btn">
+                                    👁
+                                </a>
+                                <a href="#" class="edit-btn">
+                                    ✏
+                                </a>
+                                <a href="#" class="delete-btn">
+                                    🗑
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

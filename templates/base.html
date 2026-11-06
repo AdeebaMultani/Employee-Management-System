@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Employee Management System
+        {% endblock %}
+    </title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">E</div>
+            <span>EMS</span>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <!-- Dashboard --> 
+
+            <a href="{% url 'dashboard' %}"
+            class="menu-item"
+            data-page="dashboard">
+            <span class="menu-icon">⌂</span>
+            <span>Dashboard</span></a>
+            
+            <!-- Employees -->
+
+            <a href="{% url 'employee_list' %}"
+            class="menu-item"
+            data-page="employees">
+            <span class="menu-icon">👥</span>
+            <span>Employees</span></a>
+            
+            <!-- Add Employee -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="add-employee">
+            <span class="menu-icon">＋</span>
+            <span>Add Employee</span></a>
+            
+            <!-- Departments -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="departments">
+            <span class="menu-icon">▣</span>
+            <span>Departments</span></a>
+
+            <!-- Attendance -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="attendance">
+            <span class="menu-icon">✓</span>
+            <span>Attendance</span></a>
+            
+            <!-- Leave Management -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="leave">
+            <span class="menu-icon">□</span>
+            <span>Leave Management</span></a>
+            
+            <!-- Salary -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="salary">
+            <span class="menu-icon">₹</span>
+            <span>Salary</span></a>
+            
+            <!-- Reports -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="reports">
+            <span class="menu-icon">▤</span>
+            <span>Reports</span></a>
+            
+            <!-- Profile -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="profile">
+            <span class="menu-icon">●</span>
+            <span>Profile</span></a>
+            
+            <!-- Logout -->
+             
+            <a href="#"
+            class="menu-item"
+            data-page="logout">
+            <span class="menu-icon">↪</span>
+            <span>Logout</span></a>
+
+        </nav>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <h1>
+                {% block page_title %}
+                Dashboard
+                {% endblock %}
+            </h1>
+
+            <div class="admin-profile">
+                <div class="profile-circle">A</div>
+                <span>Admin</span>
+                <span class="dropdown-arrow">⌄</span>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <section class="page-content">
+            {% block content %}
+            {% endblock %}
+        </section>
+    </main>
+
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

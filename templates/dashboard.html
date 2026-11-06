@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard - Employee Management System
+{% endblock %}
+
+{% block page_title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================
+     DASHBOARD SUMMARY CARDS
+========================== -->
+
+<div class="dashboard-cards">
+
+    <!-- Total Employees -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon employee-icon">
+            👤
+        </div>
+
+        <div class="stat-info">
+
+            <p>Total Employees</p>
+
+            <h2>120</h2>
+
+            <span>+5 this month</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Departments -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon department-icon">
+            🏢
+        </div>
+
+        <div class="stat-info">
+
+            <p>Departments</p>
+
+            <h2>8</h2>
+
+            <span>+1 this month</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Present Today -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon attendance-icon">
+            ✓
+        </div>
+
+        <div class="stat-info">
+
+            <p>Present Today</p>
+
+            <h2>98</h2>
+
+            <span>82% attendance</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Total Leaves -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon leave-icon">
+            📅
+        </div>
+
+        <div class="stat-info">
+
+            <p>Total Leaves</p>
+
+            <h2>12</h2>
+
+            <span>+2 today</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     DASHBOARD LOWER SECTION
+========================== -->
+
+<div class="dashboard-grid">
+
+
+    <!-- =========================
+         RECENT EMPLOYEES
+    ========================== -->
+
+    <div class="dashboard-card employees-card">
+
+        <div class="card-header">
+
+            <h3>Recent Employees</h3>
+
+            <a href="#">
+                View All Employees →
+            </a>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Email</th>
+                        <th>Joining Date</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+                        <td>John Doe</td>
+                        <td>IT</td>
+                        <td>john@example.com</td>
+                        <td>2024-01-15</td>
+                    </tr>
+
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>HR</td>
+                        <td>jane@example.com</td>
+                        <td>2024-02-20</td>
+                    </tr>
+
+                    <tr>
+                        <td>Michael Lee</td>
+                        <td>Finance</td>
+                        <td>michael@example.com</td>
+                        <td>2024-03-10</td>
+                    </tr>
+
+                    <tr>
+                        <td>Emily Davis</td>
+                        <td>Marketing</td>
+                        <td>emily@example.com</td>
+                        <td>2024-03-18</td>
+                    </tr>
+
+                    <tr>
+                        <td>David Brown</td>
+                        <td>IT</td>
+                        <td>david@example.com</td>
+                        <td>2024-04-05</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         DEPARTMENT CHART
+    ========================== -->
+
+    <div class="dashboard-card chart-card">
+
+        <div class="card-header">
+
+            <h3>Department-wise Employees</h3>
+
+        </div>
+
+
+        <div class="chart-area">
+
+            <div class="pie-chart"></div>
+
+
+            <div class="chart-legend">
+
+                <div>
+                    <span class="legend-color color-one"></span>
+                    IT (35)
+                </div>
+
+                <div>
+                    <span class="legend-color color-two"></span>
+                    HR (20)
+                </div>
+
+                <div>
+                    <span class="legend-color color-three"></span>
+                    Finance (25)
+                </div>
+
+                <div>
+                    <span class="legend-color color-four"></span>
+                    Marketing (20)
+                </div>
+
+                <div>
+                    <span class="legend-color color-five"></span>
+                    Sales (20)
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
