@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block title %}
@@ -10,174 +11,98 @@ Dashboard
 
 {% block content %}
 
-<!-- =========================
-     DASHBOARD SUMMARY CARDS
-========================== -->
+<!-- DASHBOARD SUMMARY CARDS -->
 
 <div class="dashboard-cards">
 
-    <!-- Total Employees -->
-
     <div class="stat-card">
-
-        <div class="stat-icon employee-icon">
-            👤
-        </div>
-
+        <div class="stat-icon employee-icon">👤</div>
         <div class="stat-info">
-
             <p>Total Employees</p>
-
-            <h2>120</h2>
-
-            <span>+5 this month</span>
-
+            <h2>{{ total_employees }}</h2>
+            <span>Registered employees</span>
         </div>
-
     </div>
 
-
-    <!-- Departments -->
-
     <div class="stat-card">
-
-        <div class="stat-icon department-icon">
-            🏢
-        </div>
-
+        <div class="stat-icon department-icon">🏢</div>
         <div class="stat-info">
-
             <p>Departments</p>
-
-            <h2>8</h2>
-
-            <span>+1 this month</span>
-
+            <h2>{{ total_departments }}</h2>
+            <span>Active departments</span>
         </div>
-
     </div>
 
-
-    <!-- Present Today -->
-
     <div class="stat-card">
-
-        <div class="stat-icon attendance-icon">
-            ✓
-        </div>
-
+        <div class="stat-icon attendance-icon">✓</div>
         <div class="stat-info">
-
             <p>Present Today</p>
-
-            <h2>98</h2>
-
-            <span>82% attendance</span>
-
+            <h2>—</h2>
+            <span>Attendance module coming soon</span>
         </div>
-
     </div>
 
-
-    <!-- Total Leaves -->
-
     <div class="stat-card">
-
-        <div class="stat-icon leave-icon">
-            📅
-        </div>
-
+        <div class="stat-icon leave-icon">📅</div>
         <div class="stat-info">
-
             <p>Total Leaves</p>
-
-            <h2>12</h2>
-
-            <span>+2 today</span>
-
+            <h2>—</h2>
+            <span>Leave module coming soon</span>
         </div>
-
     </div>
 
 </div>
 
 
-<!-- =========================
-     DASHBOARD LOWER SECTION
-========================== -->
+<!-- DASHBOARD LOWER SECTION -->
 
 <div class="dashboard-grid">
 
-
-    <!-- =========================
-         RECENT EMPLOYEES
-    ========================== -->
+    <!-- RECENT EMPLOYEES -->
 
     <div class="dashboard-card employees-card">
 
         <div class="card-header">
-
             <h3>Recent Employees</h3>
 
-            <a href="#">
+            <a href="{% url 'employee_list' %}">
                 View All Employees →
             </a>
-
         </div>
-
 
         <div class="table-container">
 
             <table>
 
                 <thead>
-
                     <tr>
                         <th>Name</th>
                         <th>Department</th>
                         <th>Email</th>
                         <th>Joining Date</th>
                     </tr>
-
                 </thead>
-
 
                 <tbody>
 
-                    <tr>
-                        <td>John Doe</td>
-                        <td>IT</td>
-                        <td>john@example.com</td>
-                        <td>2024-01-15</td>
-                    </tr>
+                    {% for employee in recent_employees %}
 
                     <tr>
-                        <td>Jane Smith</td>
-                        <td>HR</td>
-                        <td>jane@example.com</td>
-                        <td>2024-02-20</td>
+                        <td>{{ employee.full_name }}</td>
+                        <td>{{ employee.department }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.joining_date|date:"Y-m-d" }}</td>
                     </tr>
 
-                    <tr>
-                        <td>Michael Lee</td>
-                        <td>Finance</td>
-                        <td>michael@example.com</td>
-                        <td>2024-03-10</td>
-                    </tr>
+                    {% empty %}
 
                     <tr>
-                        <td>Emily Davis</td>
-                        <td>Marketing</td>
-                        <td>emily@example.com</td>
-                        <td>2024-03-18</td>
+                        <td colspan="4" style="text-align:center;">
+                            No employees found. Add your first employee!
+                        </td>
                     </tr>
 
-                    <tr>
-                        <td>David Brown</td>
-                        <td>IT</td>
-                        <td>david@example.com</td>
-                        <td>2024-04-05</td>
-                    </tr>
+                    {% endfor %}
 
                 </tbody>
 
@@ -188,52 +113,45 @@ Dashboard
     </div>
 
 
-    <!-- =========================
-         DEPARTMENT CHART
-    ========================== -->
+    <!-- DEPARTMENT-WISE EMPLOYEES -->
 
     <div class="dashboard-card chart-card">
 
         <div class="card-header">
-
             <h3>Department-wise Employees</h3>
-
         </div>
 
+        <div class="department-list">
 
-        <div class="chart-area">
+            {% for dept in department_data %}
 
-            <div class="pie-chart"></div>
+            <div class="department-item">
 
+                <div class="department-info">
 
-            <div class="chart-legend">
+                    <span>{{ dept.name }}</span>
 
-                <div>
-                    <span class="legend-color color-one"></span>
-                    IT (35)
+                    <span>
+                        {{ dept.total }} ({{ dept.percentage }}%)
+                    </span>
+
                 </div>
 
-                <div>
-                    <span class="legend-color color-two"></span>
-                    HR (20)
-                </div>
+                <div class="department-track">
 
-                <div>
-                    <span class="legend-color color-three"></span>
-                    Finance (25)
-                </div>
+                    <div class="department-fill"
+                         style="width: {{ dept.percentage }}%;">
+                    </div>
 
-                <div>
-                    <span class="legend-color color-four"></span>
-                    Marketing (20)
-                </div>
-
-                <div>
-                    <span class="legend-color color-five"></span>
-                    Sales (20)
                 </div>
 
             </div>
+
+            {% empty %}
+
+            <p>No department data available yet.</p>
+
+            {% endfor %}
 
         </div>
 

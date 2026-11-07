@@ -1,0 +1,83 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Add Employee - EMS
+{% endblock %}
+
+{% block page_title %}
+Add Employee
+{% endblock %}
+
+{% block content %}
+
+<div class="employees-page">
+
+    <div class="employees-header">
+
+        <div>
+            <h2>Add New Employee</h2>
+            <p>Enter employee information below.</p>
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card employee-form-card">
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="employee-form-grid">
+
+                {% for field in form %}
+
+                    <div class="form-group">
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.errors %}
+                            <div class="field-error">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="form-actions">
+
+                <a href="{% url 'employee_list' %}"
+                   class="cancel-btn">
+                    Cancel
+                </a>
+
+                <button type="submit"
+                        class="add-employee-btn">
+                    Save Employee
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
