@@ -1,0 +1,116 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Employee Profile - EMS
+{% endblock %}
+
+{% block page_title %}
+Employee Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="employees-page">
+
+    <div class="employees-header">
+
+        <div>
+            <h2>Employee Profile</h2>
+            <p>View complete employee information.</p>
+        </div>
+
+        <a href="{% url 'employee_list' %}"
+           class="cancel-btn">
+            ← Back to Employees
+        </a>
+
+    </div>
+
+
+    <div class="dashboard-card profile-card">
+
+        <div class="profile-header">
+
+            {% if employee.photo %}
+
+                <img src="{{ employee.photo.url }}"
+                     alt="Employee Photo"
+                     class="profile-photo">
+
+            {% else %}
+
+                <div class="profile-placeholder">
+                    {{ employee.full_name|first|upper }}
+                </div>
+
+            {% endif %}
+
+            <div>
+                <h2>{{ employee.full_name }}</h2>
+                <p>{{ employee.designation }}</p>
+                <span>{{ employee.department }}</span>
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <h3>Personal Information</h3>
+
+        <div class="profile-details">
+
+            <div>
+                <label>Employee ID</label>
+                <p>{{ employee.id }}</p>
+            </div>
+
+            <div>
+                <label>Full Name</label>
+                <p>{{ employee.full_name }}</p>
+            </div>
+
+            <div>
+                <label>Email Address</label>
+                <p>{{ employee.email }}</p>
+            </div>
+
+            <div>
+                <label>Phone Number</label>
+                <p>{{ employee.phone }}</p>
+            </div>
+
+            <div>
+                <label>Department</label>
+                <p>{{ employee.department }}</p>
+            </div>
+
+            <div>
+                <label>Designation</label>
+                <p>{{ employee.designation }}</p>
+            </div>
+
+            <div>
+                <label>Joining Date</label>
+                <p>{{ employee.joining_date|date:"d M Y" }}</p>
+            </div>
+
+            <div>
+                <label>Salary</label>
+                <p>₹ {{ employee.salary|floatformat:2 }}</p>
+            </div>
+
+            <div>
+                <label>Created At</label>
+                <p>{{ employee.created_at|date:"d M Y, h:i A" }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

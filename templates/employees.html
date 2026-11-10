@@ -28,18 +28,32 @@ Employees
 
     </div>
 
-    <!-- SEARCH BAR -->
-
-    <div class="employee-toolbar">
+    <!-- SEARCH AND DEPARTMENT FILTER -->
+     
+    <form method="GET" action="{% url 'employee_list' %}" class="employee-toolbar">
         <div class="search-box">
             <span>🔍</span>
-            <input
-                type="text"
-                id="employeeSearch"
-                placeholder="Search employees..."
-            >
+            <input type="text" name="q" placeholder="Search by name, email, phone..." value="{{ search_query }}">
         </div>
-    </div>
+
+        <div class="department-filter">
+            <select name="department">
+                <option value="">All Departments</option>
+                
+                {% for department in departments %}
+                <option value="{{ department }}"
+                    {% if selected_department == department %}selected{% endif %}>
+                    {{ department }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="add-employee-btn">
+            Apply Filters
+        </button>
+        <a href="{% url 'employee_list' %}" class="reset-filter-btn"> Reset</a>
+    </form>
+
 
     <!-- EMPLOYEES TABLE -->
 
@@ -60,16 +74,43 @@ Employees
                     {% for employee in employees %}
                     
                     <tr>
-                        <td>{{ employee.id }}</td>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ employee.full_name }}</td>
                         <td>{{ employee.email }}</td>
                         <td>{{ employee.department }}</td>
                         <td>{{ employee.designation }}</td>
                         <td>
                             <div class="employee-actions">
-                                <a href="#" class="view-btn" title="View">👁</a>
-                                <a href="#" class="edit-btn" title="Edit">✏</a>
-                                <a href="#" class="delete-btn" title="Delete">🗑</a>
+                                <a href="{% url 'employee_detail' employee.id %}"
+                                    class="view-btn"
+                                    title="View Employee">
+                                    👁
+                                </a>
+
+                                <a href="{% url 'edit_employee' employee.id %}"
+                                    class="edit-btn"
+                                    title="Edit Employee">
+                                    ✏
+                                </a>
+
+                                <!-- <form method="POST"
+                                    action="{% url 'delete_employee' employee.id %}"
+                                    style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                        class="delete-btn"
+                                        title="Delete Employee"
+                                        style="border:none; cursor:pointer;">
+                                        
+                                    </button>
+                                </form> -->
+
+                                <a href="{% url 'delete_employee' employee.id %}"
+                                    class="delete-btn"
+                                    title="Delete Employee">
+                                    🗑
+                                </a>
+
                             </div>
                         </td>
                     </tr>
@@ -77,7 +118,7 @@ Employees
                     
                     <tr>
                         <td colspan="6" style="text-align: center; padding: 30px;">
-                            No employees found. Add your first employee!
+                            No matching employees found. Try changing your search or filters.
                         </td>
                     </tr>
                     {% endfor %}

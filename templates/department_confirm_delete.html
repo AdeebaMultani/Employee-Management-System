@@ -1,0 +1,80 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Department - Employee Management System
+{% endblock %}
+
+{% block page_title %}
+Delete Department
+{% endblock %}
+
+{% block content %}
+
+<div class="employees-page">
+
+    <div class="dashboard-card delete-confirm-card">
+
+        <div class="delete-icon">
+            🗑
+        </div>
+
+        <h2>Delete Department?</h2>
+
+        <p>
+            Are you sure you want to delete
+            <strong>{{ department.name }}</strong>?
+        </p>
+
+        {% if error %}
+
+            <p class="delete-warning">
+                {{ error }}
+            </p>
+
+        {% elif employee_count > 0 %}
+
+            <p class="delete-warning">
+                This department currently has
+                {{ employee_count }} employees.
+                You must reassign them before deleting this department.
+            </p>
+
+        {% else %}
+
+            <p class="delete-warning">
+                This action cannot be undone.
+            </p>
+
+        {% endif %}
+
+
+        <div class="form-actions">
+
+            <a href="{% url 'department_list' %}"
+               class="cancel-btn">
+                Cancel
+            </a>
+
+            {% if employee_count == 0 %}
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="delete-confirm-btn">
+                        Yes, Delete
+                    </button>
+
+                </form>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

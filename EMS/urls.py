@@ -16,6 +16,9 @@ urlpatterns = [
     # Employees
     path('employees/', include('employees.urls')),
 
+    # Departments
+    path('departments/', include('departments.urls')),
+
 ]
 
 if settings.DEBUG:

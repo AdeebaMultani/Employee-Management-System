@@ -1,0 +1,169 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Departments - Employee Management System
+{% endblock %}
+
+{% block page_title %}
+Departments
+{% endblock %}
+
+{% block content %}
+
+<div class="employees-page">
+
+    <!-- PAGE HEADER -->
+
+    <div class="employees-header">
+
+        <div>
+            <h2>Departments</h2>
+
+            <p>
+                Manage your organization departments.
+                Total Departments:
+                <strong>{{ total_departments }}</strong>
+            </p>
+        </div>
+
+        <a href="{% url 'add_department' %}"
+           class="add-employee-btn">
+            + Add Department
+        </a>
+
+    </div>
+
+
+    <!-- SEARCH SECTION -->
+
+    <div class="employee-toolbar">
+
+        <form method="GET"
+              class="department-search-form">
+
+            <div class="search-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ search_query }}"
+                    placeholder="Search departments..."
+                >
+
+            </div>
+
+            <button type="submit"
+                    class="add-employee-btn">
+                Search
+            </button>
+
+            <a href="{% url 'department_list' %}"
+               class="reset-filter-btn">
+                Reset
+            </a>
+
+        </form>
+
+    </div>
+
+
+    <!-- DEPARTMENT TABLE -->
+
+    <div class="dashboard-card employees-table-card">
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Department Name</th>
+                        <th>Description</th>
+                        <th>Employees</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for department in departments %}
+
+                    <tr>
+
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            <strong>{{ department.name }}</strong>
+                        </td>
+
+                        <td>
+                            {{ department.description|default:"No description" }}
+                        </td>
+
+                        <td>
+                            <span class="employee-count-badge">
+                                {{ department.employee_count }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ department.created_at|date:"d M Y" }}
+                        </td>
+
+                        <td>
+
+                            <div class="employee-actions">
+
+                                <a href="{% url 'edit_department' department.id %}"
+                                   class="edit-btn"
+                                   title="Edit Department">
+                                    ✏
+                                </a>
+
+                                <a href="{% url 'delete_department' department.id %}"
+                                   class="delete-btn"
+                                   title="Delete Department">
+                                    🗑
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="6"
+                            style="text-align:center; padding:30px;">
+
+                            {% if search_query %}
+                                No departments found matching your search.
+                            {% else %}
+                                No departments added yet. Add your first department!
+                            {% endif %}
+
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

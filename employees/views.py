@@ -1,22 +1,49 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from .models import Employee
 from .forms import EmployeeForm
 
 
 def employee_list(request):
 
-    # Fetch all employees
-    employees = Employee.objects.all().order_by('-created_at')
+    employees = Employee.objects.all()
 
-    # Count total employees
-    total_employees = employees.count()
+    # Search functionality
+    search_query = request.GET.get('q', '').strip()
+
+    if search_query:
+        employees = employees.filter(
+            Q(full_name__icontains=search_query) |
+            Q(email__icontains=search_query) |
+            Q(phone__icontains=search_query) |
+            Q(department__icontains=search_query) |
+            Q(designation__icontains=search_query)
+        )
+
+    # Department filter
+    selected_department = request.GET.get('department', '').strip()
+
+    if selected_department:
+        employees = employees.filter(department=selected_department)
+
+    # Alphabetical ordering
+    employees = employees.order_by('full_name')
+
+    # Department list
+    departments = Employee.objects.order_by(
+        'department'
+    ).values_list('department', flat=True).distinct()
 
     context = {
         'employees': employees,
-        'total_employees': total_employees,
+        'total_employees': Employee.objects.count(),
+        'departments': departments,
+        'search_query': search_query,
+        'selected_department': selected_department,
     }
 
     return render(request, 'employees.html', context)
+
 
 
 def add_employee(request):
@@ -43,3 +70,60 @@ def add_employee(request):
     }
 
     return render(request, 'add_employee.html', context)
+
+def employee_detail(request, pk):
+
+    # Find employee using their ID
+    employee = get_object_or_404(Employee, pk=pk)
+
+    context = {
+        'employee': employee,
+    }
+
+    return render(request, 'employee_detail.html', context)
+
+def edit_employee(request, pk):
+
+    # Find employee using ID
+    employee = get_object_or_404(Employee, pk=pk)
+
+    if request.method == 'POST':
+
+        form = EmployeeForm(
+            request.POST,
+            request.FILES,
+            instance=employee
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect('employee_list')
+
+    else:
+
+        form = EmployeeForm(instance=employee)
+
+    context = {
+        'form': form,
+        'employee': employee,
+    }
+
+    return render(request, 'edit_employee.html', context)
+
+def delete_employee(request, pk):
+
+    employee = get_object_or_404(Employee, pk=pk)
+
+    if request.method == 'POST':
+
+        employee.delete()
+
+        return redirect('employee_list')
+
+    context = {
+        'employee': employee,
+    }
+
+    return render(request, 'delete_employee.html', context)
