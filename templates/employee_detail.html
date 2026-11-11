@@ -49,7 +49,7 @@ Employee Profile
             <div>
                 <h2>{{ employee.full_name }}</h2>
                 <p>{{ employee.designation }}</p>
-                <span>{{ employee.department }}</span>
+                <span>{{ employee.department_ref.name }}</span>
             </div>
 
         </div>
@@ -84,7 +84,7 @@ Employee Profile
 
             <div>
                 <label>Department</label>
-                <p>{{ employee.department }}</p>
+                <p>{{ employee.department.name }}</p>
             </div>
 
             <div>

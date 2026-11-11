@@ -1,4 +1,5 @@
 from django.db import models
+from departments.models import Department
 
 
 class Employee(models.Model):
@@ -8,8 +9,16 @@ class Employee(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15)
 
+    # Department relationship
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name='employees'
+    )
+
     # Job information
-    department = models.CharField(max_length=100)
     designation = models.CharField(max_length=100)
 
     # Joining information

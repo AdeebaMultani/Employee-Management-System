@@ -1,6 +1,6 @@
-
 from django import forms
 from .models import Employee
+from departments.models import Department
 
 
 class EmployeeForm(forms.ModelForm):
@@ -20,6 +20,10 @@ class EmployeeForm(forms.ModelForm):
         ]
 
         widgets = {
+            'department': forms.Select(
+                attrs={'class': 'form-control'}
+            ),
+
             'joining_date': forms.DateInput(
                 attrs={'type': 'date'}
             ),
@@ -30,3 +34,9 @@ class EmployeeForm(forms.ModelForm):
 
             'photo': forms.ClearableFileInput(),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['department'].queryset = Department.objects.order_by('name')
+        self.fields['department'].empty_label = 'Select Department'

@@ -41,11 +41,12 @@ Employees
                 <option value="">All Departments</option>
                 
                 {% for department in departments %}
-                <option value="{{ department }}"
-                    {% if selected_department == department %}selected{% endif %}>
-                    {{ department }}
+                <option value="{{ department.name }}"
+                    {% if selected_department == department.name %}selected{% endif %}>
+                    {{ department.name }}
                 </option>
                 {% endfor %}
+
             </select>
         </div>
         <button type="submit" class="add-employee-btn">
@@ -77,7 +78,7 @@ Employees
                         <td>{{ forloop.counter }}</td>
                         <td>{{ employee.full_name }}</td>
                         <td>{{ employee.email }}</td>
-                        <td>{{ employee.department }}</td>
+                        <td>{{ employee.department.name }}</td>
                         <td>{{ employee.designation }}</td>
                         <td>
                             <div class="employee-actions">

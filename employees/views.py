@@ -1,12 +1,14 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .models import Employee
 from .forms import EmployeeForm
+from departments.models import Department
 
 
 def employee_list(request):
 
-    employees = Employee.objects.all()
+    employees = Employee.objects.select_related('department').all()
 
     # Search functionality
     search_query = request.GET.get('q', '').strip()
@@ -16,7 +18,7 @@ def employee_list(request):
             Q(full_name__icontains=search_query) |
             Q(email__icontains=search_query) |
             Q(phone__icontains=search_query) |
-            Q(department__icontains=search_query) |
+            Q(department__name__icontains=search_query) |
             Q(designation__icontains=search_query)
         )
 
@@ -24,15 +26,14 @@ def employee_list(request):
     selected_department = request.GET.get('department', '').strip()
 
     if selected_department:
-        employees = employees.filter(department=selected_department)
+        employees = employees.filter(
+            department__name=selected_department
+        )
 
     # Alphabetical ordering
     employees = employees.order_by('full_name')
 
-    # Department list
-    departments = Employee.objects.order_by(
-        'department'
-    ).values_list('department', flat=True).distinct()
+    departments = Department.objects.order_by('name')
 
     context = {
         'employees': employees,
@@ -45,50 +46,40 @@ def employee_list(request):
     return render(request, 'employees.html', context)
 
 
-
 def add_employee(request):
 
     if request.method == 'POST':
-
-        form = EmployeeForm(
-            request.POST,
-            request.FILES
-        )
+        form = EmployeeForm(request.POST, request.FILES)
 
         if form.is_valid():
-
             form.save()
-
             return redirect('employee_list')
 
     else:
-
         form = EmployeeForm()
 
-    context = {
-        'form': form,
-    }
+    return render(request, 'add_employee.html', {'form': form})
 
-    return render(request, 'add_employee.html', context)
 
 def employee_detail(request, pk):
 
-    # Find employee using their ID
-    employee = get_object_or_404(Employee, pk=pk)
+    employee = get_object_or_404(
+        Employee.objects.select_related('department'),
+        pk=pk
+    )
 
-    context = {
-        'employee': employee,
-    }
+    return render(
+        request,
+        'employee_detail.html',
+        {'employee': employee}
+    )
 
-    return render(request, 'employee_detail.html', context)
 
 def edit_employee(request, pk):
 
-    # Find employee using ID
     employee = get_object_or_404(Employee, pk=pk)
 
     if request.method == 'POST':
-
         form = EmployeeForm(
             request.POST,
             request.FILES,
@@ -96,13 +87,10 @@ def edit_employee(request, pk):
         )
 
         if form.is_valid():
-
             form.save()
-
             return redirect('employee_list')
 
     else:
-
         form = EmployeeForm(instance=employee)
 
     context = {
@@ -112,18 +100,17 @@ def edit_employee(request, pk):
 
     return render(request, 'edit_employee.html', context)
 
+
 def delete_employee(request, pk):
 
     employee = get_object_or_404(Employee, pk=pk)
 
     if request.method == 'POST':
-
         employee.delete()
-
         return redirect('employee_list')
 
-    context = {
-        'employee': employee,
-    }
-
-    return render(request, 'delete_employee.html', context)
+    return render(
+        request,
+        'delete_employee.html',
+        {'employee': employee}
+    )
