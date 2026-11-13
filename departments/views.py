@@ -1,5 +1,5 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from employees.models import Employee
 from .models import Department
@@ -8,6 +8,7 @@ from .forms import DepartmentForm
 
 # VIEW ALL DEPARTMENTS + SEARCH
 
+@login_required
 def department_list(request):
 
     departments = Department.objects.all().order_by('name')
@@ -36,6 +37,7 @@ def department_list(request):
 
 # ADD DEPARTMENT
 
+@login_required
 def add_department(request):
 
     if request.method == 'POST':
@@ -60,6 +62,7 @@ def add_department(request):
 
 # EDIT DEPARTMENT
 
+@login_required
 def edit_department(request, pk):
 
     department = get_object_or_404(Department, pk=pk)
@@ -90,6 +93,7 @@ def edit_department(request, pk):
 
 # DELETE DEPARTMENT
 
+@login_required
 def delete_department(request, pk):
 
     department = get_object_or_404(Department, pk=pk)

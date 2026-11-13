@@ -1,11 +1,14 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+
 from .models import Employee
 from .forms import EmployeeForm
 from departments.models import Department
 
 
+@login_required
 def employee_list(request):
 
     employees = Employee.objects.select_related('department').all()
@@ -46,6 +49,7 @@ def employee_list(request):
     return render(request, 'employees.html', context)
 
 
+@login_required
 def add_employee(request):
 
     if request.method == 'POST':
@@ -61,6 +65,7 @@ def add_employee(request):
     return render(request, 'add_employee.html', {'form': form})
 
 
+@login_required
 def employee_detail(request, pk):
 
     employee = get_object_or_404(
@@ -75,6 +80,7 @@ def employee_detail(request, pk):
     )
 
 
+@login_required
 def edit_employee(request, pk):
 
     employee = get_object_or_404(Employee, pk=pk)
@@ -101,6 +107,7 @@ def edit_employee(request, pk):
     return render(request, 'edit_employee.html', context)
 
 
+@login_required
 def delete_employee(request, pk):
 
     employee = get_object_or_404(Employee, pk=pk)

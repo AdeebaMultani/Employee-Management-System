@@ -1375,3 +1375,383 @@ button {
     }
 
 }
+
+/* LOGOUT BUTTON */
+
+.logout-form {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.logout-btn {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    color: inherit;
+}
+
+.logout-btn:hover {
+    background: #f5eafa;
+    color: #8969b5;
+}
+
+/* =================================
+   ATTENDANCE MANAGEMENT
+================================= */
+
+.attendance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.attendance-header p {
+    margin-top: 8px;
+    color: #777;
+}
+
+.mark-attendance-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #a78bce;
+    color: white;
+    text-decoration: none;
+    border-radius: 9px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.mark-attendance-btn:hover {
+    background: #8969b5;
+}
+
+.attendance-form-container {
+    max-width: 750px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.attendance-form-header {
+    margin-bottom: 25px;
+}
+
+.attendance-form-header h2 {
+    color: #39334a;
+    margin-bottom: 8px;
+}
+
+.attendance-form-header p {
+    color: #888;
+}
+
+.attendance-form .form-group {
+    margin-bottom: 20px;
+}
+
+.attendance-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #554c65;
+}
+
+.attendance-form input,
+.attendance-form select,
+.attendance-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e5ddef;
+    border-radius: 9px;
+    background: #fcfaff;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.attendance-form input:focus,
+.attendance-form select:focus,
+.attendance-form textarea:focus {
+    border-color: #a78bce;
+}
+
+.attendance-form .form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.attendance-form .form-row .form-group {
+    flex: 1;
+}
+
+.attendance-form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.save-attendance-btn,
+.cancel-attendance-btn {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.save-attendance-btn {
+    background: #a78bce;
+    color: white;
+}
+
+.save-attendance-btn:hover {
+    background: #8969b5;
+}
+
+.cancel-attendance-btn {
+    background: #eee9f5;
+    color: #66547f;
+}
+
+.form-errors {
+    color: #d95370;
+    margin-bottom: 15px;
+}
+
+.attendance-form .errorlist {
+    color: #d95370;
+    font-size: 13px;
+    margin-top: 5px;
+    list-style: none;
+}
+
+@media (max-width: 600px) {
+    .attendance-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .attendance-form .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* ATTENDANCE DASHBOARD CARDS */
+
+.attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.attendance-stat-card {
+    background: #eee8f7;
+    padding: 22px;
+    border-radius: 14px;
+    border-left: 4px solid #a78bce;
+}
+
+.attendance-stat-card h3 {
+    font-size: 15px;
+    color: #625477;
+    margin-bottom: 12px;
+}
+
+.attendance-stat-card h2 {
+    font-size: 30px;
+    color: #39334a;
+    margin-bottom: 7px;
+}
+
+.attendance-stat-card p {
+    font-size: 13px;
+    color: #888;
+}
+
+.present-card {
+    background: #e8f4ed;
+    border-left-color: #79b995;
+}
+
+.absent-card {
+    background: #fcebed;
+    border-left-color: #dc8b9a;
+}
+
+.late-card {
+    background: #fff3df;
+    border-left-color: #e0b66e;
+}
+
+@media (max-width: 1000px) {
+    .attendance-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .attendance-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =====================================
+   ATTENDANCE FILTER SECTION
+===================================== */
+
+.attendance-filter-form {
+    margin: 25px 0;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #eee8f5;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(70, 50, 100, 0.04);
+}
+
+.filter-group {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.8fr auto auto;
+    gap: 14px;
+    align-items: center;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #e8e0f0;
+    border-radius: 10px;
+    background: #fcfaff;
+    color: #51465f;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: #a78bce;
+    box-shadow: 0 0 0 3px rgba(167, 139, 206, 0.12);
+}
+
+.filter-btn,
+.reset-filter-btn {
+    height: 48px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.filter-btn {
+    border: none;
+    background: #a78bce;
+    color: white;
+}
+
+.filter-btn:hover {
+    background: #8969b5;
+    transform: translateY(-1px);
+}
+
+.reset-filter-btn {
+    background: #f0eaf8;
+    color: #705b8c;
+    text-decoration: none;
+}
+
+.reset-filter-btn:hover {
+    background: #e5d9f2;
+}
+
+/* =====================================
+   ATTENDANCE ACTION BUTTONS
+===================================== */
+
+.attendance-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-attendance-btn,
+.delete-attendance-link {
+    padding: 7px 13px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.edit-attendance-btn {
+    background: #eee8f7;
+    color: #8065a5;
+}
+
+.edit-attendance-btn:hover {
+    background: #dfd2ef;
+}
+
+.delete-attendance-link {
+    background: #fcebed;
+    color: #c15b70;
+}
+
+.delete-attendance-link:hover {
+    background: #f6d8df;
+}
+
+/* DELETE CONFIRMATION */
+
+.delete-attendance-details {
+    background: #faf7fc;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.delete-attendance-details p {
+    margin-bottom: 12px;
+    color: #554c65;
+}
+
+.delete-attendance-details p:last-child {
+    margin-bottom: 0;
+}
+
+.delete-attendance-btn {
+    padding: 12px 20px;
+    background: #d87588;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.delete-attendance-btn:hover {
+    background: #bd5b70;
+}

@@ -1,7 +1,6 @@
 from django.db import models
 from departments.models import Department
 
-
 class Employee(models.Model):
 
     # Basic employee information

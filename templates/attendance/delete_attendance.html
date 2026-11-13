@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Attendance - EMS
+{% endblock %}
+
+{% block page_title %}
+Delete Attendance
+{% endblock %}
+
+{% block content %}
+
+<div class="attendance-form-container">
+
+    <div class="attendance-form-header">
+        <h2>Delete Attendance Record</h2>
+        <p>Are you sure you want to delete this record?</p>
+    </div>
+
+    <div class="delete-attendance-details">
+
+        <p>
+            <strong>Employee:</strong>
+            {{ attendance.employee.full_name }}
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            {{ attendance.date|date:"d M Y" }}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            {{ attendance.status }}
+        </p>
+
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="attendance-form-actions">
+
+            <button type="submit" class="delete-attendance-btn">
+                Yes, Delete
+            </button>
+
+            <a href="{% url 'attendance_list' %}"
+               class="cancel-attendance-btn">
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

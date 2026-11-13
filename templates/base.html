@@ -62,11 +62,12 @@
 
             <!-- Attendance -->
              
-            <a href="#"
+            <a href="{% url 'attendance_list' %}"
             class="menu-item"
             data-page="attendance">
             <span class="menu-icon">✓</span>
             <span>Attendance</span></a>
+
             
             <!-- Leave Management -->
              
@@ -101,12 +102,22 @@
             <span>Profile</span></a>
             
             <!-- Logout -->
-             
-            <a href="#"
+                         
+            <form method="POST" 
+            action="{% url 'logout' %}" 
+            class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="menu-item logout-btn">
+                    <span class="menu-icon">↪</span>
+                    <span>Logout</span>
+                </button>
+            </form>
+
+            <!-- <a href="#"
             class="menu-item"
             data-page="logout">
             <span class="menu-icon">↪</span>
-            <span>Logout</span></a>
+            <span>Logout</span></a>  -->
 
         </nav>
 

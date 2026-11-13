@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 from employees.models import Employee
 
 
+@login_required
 def dashboard(request):
 
     # Total employees
@@ -41,7 +43,6 @@ def dashboard(request):
             'percentage': percentage,
         })
 
-    # Send data to dashboard.html
     context = {
         'total_employees': total_employees,
         'total_departments': total_departments,
