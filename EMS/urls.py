@@ -1,6 +1,5 @@
-
-from django.contrib import admin
 from django.urls import path, include
+from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -40,6 +39,8 @@ urlpatterns = [
     # Attendance
     path('attendance/', include('attendance.urls')),
 
+    # Leave Management
+    path('leaves/', include('leave_management.urls')),
 ]
 
 if settings.DEBUG:

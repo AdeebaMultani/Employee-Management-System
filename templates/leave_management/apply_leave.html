@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Apply for Leave - EMS
+{% endblock %}
+
+{% block page_title %}
+Apply for Leave
+{% endblock %}
+
+{% block content %}
+
+<div class="leave-container">
+
+    <div class="leave-header">
+        <div>
+            <h2>Apply for Leave</h2>
+            <p>Submit a new employee leave application.</p>
+        </div>
+
+        <a href="{% url 'leave_list' %}" class="leave-back-btn">
+            View Leave Requests
+        </a>
+    </div>
+
+    <div class="leave-form-container">
+
+        <h3>Leave Application Details</h3>
+
+        <form method="POST" class="leave-form">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="leave-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="leave-form-group">
+                <label for="{{ form.employee.id_for_label }}">
+                    Select Employee
+                </label>
+                {{ form.employee }}
+                {{ form.employee.errors }}
+            </div>
+
+            <div class="leave-form-group">
+                <label for="{{ form.leave_type.id_for_label }}">
+                    Leave Type
+                </label>
+                {{ form.leave_type }}
+                {{ form.leave_type.errors }}
+            </div>
+
+            <div class="leave-form-row">
+
+                <div class="leave-form-group">
+                    <label for="{{ form.start_date.id_for_label }}">
+                        Start Date
+                    </label>
+                    {{ form.start_date }}
+                    {{ form.start_date.errors }}
+                </div>
+
+                <div class="leave-form-group">
+                    <label for="{{ form.end_date.id_for_label }}">
+                        End Date
+                    </label>
+                    {{ form.end_date }}
+                    {{ form.end_date.errors }}
+                </div>
+
+            </div>
+
+            <div class="leave-form-group">
+                <label for="{{ form.reason.id_for_label }}">
+                    Reason for Leave
+                </label>
+                {{ form.reason }}
+                {{ form.reason.errors }}
+            </div>
+
+            <div class="leave-form-actions">
+                <button type="submit" class="leave-submit-btn">
+                    Submit Application
+                </button>
+
+                <a href="{% url 'leave_list' %}" class="leave-cancel-btn">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

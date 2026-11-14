@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Leave Request - EMS
+{% endblock %}
+
+{% block page_title %}
+Edit Leave Request
+{% endblock %}
+
+{% block content %}
+
+<div class="leave-container">
+
+    <div class="leave-header">
+        <div>
+            <h2>Edit Leave Request</h2>
+            <p>Update the pending leave application.</p>
+        </div>
+
+        <a href="{% url 'leave_list' %}" class="leave-back-btn">
+            Back to Leave Management
+        </a>
+    </div>
+
+    <div class="leave-form-container">
+
+        <h3>Leave Application Details</h3>
+
+        <form method="POST" class="leave-form">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="leave-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="leave-form-group">
+                <label>Employee</label>
+                {{ form.employee }}
+                {{ form.employee.errors }}
+            </div>
+
+            <div class="leave-form-group">
+                <label>Leave Type</label>
+                {{ form.leave_type }}
+                {{ form.leave_type.errors }}
+            </div>
+
+            <div class="leave-form-row">
+
+                <div class="leave-form-group">
+                    <label>Start Date</label>
+                    {{ form.start_date }}
+                    {{ form.start_date.errors }}
+                </div>
+
+                <div class="leave-form-group">
+                    <label>End Date</label>
+                    {{ form.end_date }}
+                    {{ form.end_date.errors }}
+                </div>
+
+            </div>
+
+            <div class="leave-form-group">
+                <label>Reason</label>
+                {{ form.reason }}
+                {{ form.reason.errors }}
+            </div>
+
+            <div class="leave-form-actions">
+
+                <button type="submit" class="leave-submit-btn">
+                    Update Request
+                </button>
+
+                <a href="{% url 'leave_list' %}"
+                   class="leave-cancel-btn">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

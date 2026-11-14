@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ employee.full_name }} - Leave History
+{% endblock %}
+
+{% block page_title %}
+Employee Leave History
+{% endblock %}
+
+{% block content %}
+
+<div class="leave-container">
+
+    <div class="leave-header">
+        <div>
+            <h2>{{ employee.full_name }}</h2>
+            <p>Complete leave application history for this employee.</p>
+        </div>
+
+        <a href="{% url 'leave_list' %}" class="leave-back-btn">
+            Back to Leave Management
+        </a>
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="leave-stats">
+
+        <div class="leave-stat-card">
+            <h3>Total Requests</h3>
+            <h2>{{ total_requests }}</h2>
+            <p>All leave applications</p>
+        </div>
+
+        <div class="leave-stat-card pending-stat">
+            <h3>Pending</h3>
+            <h2>{{ pending_count }}</h2>
+            <p>Awaiting approval</p>
+        </div>
+
+        <div class="leave-stat-card approved-stat">
+            <h3>Approved</h3>
+            <h2>{{ approved_count }}</h2>
+            <p>Approved applications</p>
+        </div>
+
+        <div class="leave-stat-card rejected-stat">
+            <h3>Rejected</h3>
+            <h2>{{ rejected_count }}</h2>
+            <p>Rejected applications</p>
+        </div>
+
+    </div>
+
+    <!-- LEAVE HISTORY TABLE -->
+
+    <div class="leave-table-container">
+
+        <h3 class="leave-history-title">Leave Application History</h3>
+
+        <table class="leave-table">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Duration</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Applied On</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for leave in leaves %}
+
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+
+                    <td>{{ leave.get_leave_type_display }}</td>
+
+                    <td>{{ leave.start_date|date:"d M Y" }}</td>
+
+                    <td>{{ leave.end_date|date:"d M Y" }}</td>
+
+                    <td>{{ leave.duration }} Days</td>
+
+                    <td>{{ leave.reason }}</td>
+
+                    <td>
+                        <span class="leave-status leave-{{ leave.status|lower }}">
+                            {{ leave.status }}
+                        </span>
+                    </td>
+
+                    <td>{{ leave.applied_at|date:"d M Y" }}</td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="8" class="leave-empty">
+                        No leave applications found for this employee.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
